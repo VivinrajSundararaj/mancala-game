@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-6" style="margin-left: 100px; margin-top: 40px;">
+
+        <div class="gameon" align="center">
+
+            <div class="row text-center">
+                <div class="col-md-2">
+                    <a class="btn btn-info btn-sq-lg" disabled>
+                         Player 02 - <strong>{{gameBoard[14]}}</strong>
+                    </a>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="row center-block">
+                        <a data-ng-click="move(13,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">13<br/> <br/><strong>{{gameBoard[13]}}</strong></a>
+                        <a data-ng-click="move(12,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">12<br/> <br/><strong>{{gameBoard[12]}}</strong></a>
+                        <a data-ng-click="move(11,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">11<br/> <br/><strong>{{gameBoard[11]}}</strong></a>
+                        <a data-ng-click="move(10,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">10<br/> <br/><strong>{{gameBoard[10]}}</strong></a>
+                        <a data-ng-click="move(9,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">9<br/> <br/><strong>{{gameBoard[9]}}</strong></a>
+                        <a data-ng-click="move(8,sundar);" class="btn btn-default btn-circle" style="width: 60px;color: #4287f5">8<br/> <br/><strong>{{gameBoard[8]}}</strong></a>
+                    </div>
+                    <br>
+                    <div class="row center-block">
+                        <a data-ng-click="move(1,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">1<br/> <br/><strong>{{gameBoard[1]}}</strong></a>
+                        <a data-ng-click="move(2,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">2<br/> <br/><strong>{{gameBoard[2]}}</strong></a>
+                        <a data-ng-click="move(3,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">3<br/> <br/><strong>{{gameBoard[3]}}</strong></a>
+                        <a data-ng-click="move(4,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">4<br/> <br/><strong>{{gameBoard[4]}}</strong></a>
+                        <a data-ng-click="move(5,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">5<br/> <br/><strong>{{gameBoard[5]}}</strong></a>
+                        <a data-ng-click="move(6,vivin);" class="btn btn-default btn-circle" style="width: 60px;color: #f56c42">6<br/> <br/><strong>{{gameBoard[6]}}</strong></a>
+                    </div>
+                </div>
+
+                <div class="col-md-2 centered">
+                    <a class="btn btn-info btn-sq-lg" disabled>
+                        Player 01 - <strong>{{gameBoard[7]}}</strong>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-6">
+    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
+        <p style="color:red;">
+            Turn: {{gameTurn.username}}
+        </p>
+    </div>
+    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
+        <p style="color:blue;" >
+            Status: {{gameState}}
+        </p>
+    </div>
+    </div>
+
+</div>
