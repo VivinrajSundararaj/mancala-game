@@ -35,7 +35,6 @@ gameModule.controller('homeController', ['$rootScope', '$scope', '$http', '$loca
     }
 ]);
 
-
 gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http', '$location',
     function (rootScope, scope, http, location) {
         rootScope.reloadGamesToJoin = function () {
