@@ -41,7 +41,7 @@ public class GameController {
 	private final Logger logger = LoggerFactory.getLogger(GameController.class);
 
 	/**
-	 * GameController constructor
+	 * GameController parameterized constructor
 	 *
 	 * @param gameService   @{@link GameService} dependency
 	 * @param playerService @{@link PlayerService} dependency
@@ -69,16 +69,15 @@ public class GameController {
 	public Game createNewGame() {
 		logger.debug("Creating new game");
 
-		Player player1 = playerService.getPlayerByUsername("vivin");
-		Player player2 = playerService.getPlayerByUsername("sundar");
-		Game game = gameService.createNewGame(player1, player2);
+		Player player = playerService.getLoggedInUser();
+		Game game = gameService.createNewGame(player);
 
 		// Create the game GameBoard
 		MancalaBoard board = boardService.createNewBoard(game);
 
 		// Create Pits 6x6 layout + 2 Large Pits
-		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P1_STORE, 0); // store pos 7
-		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P2_STORE, 0); // store post 14
+		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P1_STORE, 0); // store position 7
+		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P2_STORE, 0); // store position 14
 
 		// P1 small pits
 		for (int i = PlayService.P1_LOWER_BOUNDARY; i <= PlayService.P1_UPPER_BOUNDARY; i++) {
@@ -110,7 +109,7 @@ public class GameController {
 		logger.debug("Joining game");
 
 		// Get logged in player
-		Player player = playerService.getPlayerByUsername("vivin");
+		Player player = playerService.getLoggedInUser();
 
 		// Retrieve game to join and join
 		Game game = gameService.joinGame(player, id);
@@ -136,7 +135,7 @@ public class GameController {
 	public List<Game> getGamesToJoin() {
 		logger.debug("Getting games to Join");
 
-		return gameService.getGamesToJoin(playerService.getPlayerByUsername("vivin"));
+		return gameService.getGamesToJoin(playerService.getLoggedInUser());
 	}
 
 	/**
@@ -148,7 +147,7 @@ public class GameController {
 	public List<Game> getPlayerGames() {
 		logger.debug("Getting active game for player");
 
-		return gameService.getPlayerGames(playerService.getPlayerByUsername("vivin"));
+		return gameService.getPlayerGames(playerService.getLoggedInUser());
 	}
 
 	/**

@@ -31,5 +31,4 @@ public class MancalaGameBolApplicationTests {
 		assertThat(playController).isNotNull();
 		assertThat(playerController).isNotNull();
 	}
-
 }

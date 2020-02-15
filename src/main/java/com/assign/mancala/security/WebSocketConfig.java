@@ -1,4 +1,4 @@
-package com.assign.mancala.socket;
+package com.assign.mancala.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

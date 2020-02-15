@@ -10,11 +10,40 @@
 
                 <div class="form-group">
                     <div  style="padding-bottom:50px">
-                        <button type="submit" class="btn btn-md btn-primary" style="width:300px;;text-align:center;" ng-disabled="createNewGame.$invalid">
+                        <button type="submit" class="btn btn-md btn-primary" style="width:300px;text-align:center;" ng-disabled="createNewGame.$invalid">
                         <span class="glyphicon"></span> Start a new Mancala Game</button>
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    
+     <!-- JOIN EXISTING GAME -->
+    <div class="row">
+        <div class="col" align="center" ng-controller="gamesToJoinController">
+
+            <table class="table table-hover table-striped table-condensed" ng-show="gamesToJoin.length">
+                <h2 class="lead">Join existing game</h2>
+                <thead>
+                <td>Started player</td>
+                <td>Game state</td>
+                <td></td>
+                </thead>
+                <tbody>
+                <tr ng-repeat="game in gamesToJoin">
+                    <td>{{game.firstPlayer.username}}</td>
+                    <td>{{game.gameState}}</td>
+                    <td>
+                        <button type="submit" class="btn btn-sm" ng-click="joinGame(game.id)">
+                            <span class="glyphicon glyphicon-plus"></span> Join </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-show="!gamesToJoin.length">
+                No games to join.
+            </div>
+
         </div>
     </div>
 </div>

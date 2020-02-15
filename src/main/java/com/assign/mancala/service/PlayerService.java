@@ -1,9 +1,11 @@
 package com.assign.mancala.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.assign.mancala.model.CustomPlayer;
 import com.assign.mancala.model.Player;
 import com.assign.mancala.object.PlayerDTO;
 import com.assign.mancala.repository.PlayerRepository;
@@ -58,7 +60,8 @@ public class PlayerService {
 	 *
 	 * @return @{@link Player} that is logged in
 	 */
-	public Player getLoggedInUser(String name) {
-		return playerRepository.findOneByUsername(name);
+	public Player getLoggedInUser() {
+		CustomPlayer principal = (CustomPlayer) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return playerRepository.findOneByUsername(principal.getPlayer().getUsername());
 	}
 }

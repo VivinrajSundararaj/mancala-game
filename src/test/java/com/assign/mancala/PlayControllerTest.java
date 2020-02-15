@@ -91,7 +91,7 @@ public class PlayControllerTest {
 
 		board.setPits(pits);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(any(Long.class))).thenReturn(gameOne);
 		when(playService.doMove(gameOne, player, 2)).thenReturn(board);
 		this.mockMvc.perform(post("/play/move/2").sessionAttr("gameId", gameId)).andDo(print())
@@ -110,7 +110,7 @@ public class PlayControllerTest {
 		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
 
 		// Rules
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 
 		// Call SUT
@@ -129,7 +129,7 @@ public class PlayControllerTest {
 		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
 
 		int score = 991;
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 		when(playService.getScore(gameOne, player)).thenReturn(score);
 
@@ -147,7 +147,7 @@ public class PlayControllerTest {
 		Long gameId = 1L;
 		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 
 		this.mockMvc.perform(get("/play/state").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())
@@ -187,7 +187,7 @@ public class PlayControllerTest {
 
 		board.setPits(pits);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 		when(boardService.getBoardByGame(gameOne)).thenReturn(board);
 		this.mockMvc.perform(get("/play/board").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())

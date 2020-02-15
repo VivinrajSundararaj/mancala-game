@@ -72,7 +72,7 @@ public class GameControllerTest {
 		List<Game> games = new ArrayList<>();
 		games.add(gameOne);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGamesToJoin(player)).thenReturn(games);
 
 		this.mockMvc.perform(get("/game/list")).andDo(print()).andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class GameControllerTest {
 		List<Game> games = new ArrayList<>();
 		games.add(gameOne);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player);
+		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getPlayerGames(player)).thenReturn(games);
 
 		this.mockMvc.perform(get("/game/player/list")).andDo(print()).andExpect(status().isOk())
@@ -120,32 +120,30 @@ public class GameControllerTest {
 	public void testJoinGame() throws Exception {
 		ObjectMapper objMapper = new ObjectMapper();
 
-		Player player = new Player("vivin", "sundar");
+		Player player = new Player("vivin", "vivin");
 		Player playerTwo = new Player("sundar", "sundar");
 		Long gameId = 1L;
 		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
 
-		when(playerService.getPlayerByUsername("sundar")).thenReturn(playerTwo);
+		when(playerService.getLoggedInUser()).thenReturn(playerTwo);
 		when(gameService.joinGame(playerTwo, gameId)).thenReturn(gameOne);
 		this.mockMvc.perform(post("/game/join/1")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(objMapper.writeValueAsString(gameOne))));
 	}
 
 	@Test
-	@WithMockUser(username = "vivin", password = "vivin")
+	@WithMockUser(username = "sundar", password = "sundar")
 	public void testCreateGame() throws Exception {
 		ObjectMapper objMapper = new ObjectMapper();
 
-		Player player1 = new Player("vivin", "vivin");
-		Player player2 = new Player("sundar", "sundar");
+		Player player = new Player("vivin", "vivin");
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player1, null, player2, Game.State.WAIT_FOR_OPPONENT);
+		Game gameOne = new Game(gameId, player, null, player, Game.State.WAIT_FOR_OPPONENT);
 
 		MancalaBoard boardMock = mock(MancalaBoard.class);
 
-		when(playerService.getPlayerByUsername("vivin")).thenReturn(player1);
-		when(playerService.getPlayerByUsername("sundar")).thenReturn(player2);
-		when(gameService.createNewGame(player1, player2)).thenReturn(gameOne);
+		when(playerService.getLoggedInUser()).thenReturn(player);
+		when(gameService.createNewGame(player)).thenReturn(gameOne);
 		when(boardService.createNewBoard(gameOne)).thenReturn(boardMock);
 
 		this.mockMvc.perform(post("/game/create")).andDo(print()).andExpect(status().isOk())

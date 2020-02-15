@@ -36,9 +36,9 @@ public class GameService {
 	 * @param player @{@link Player} that created the game
 	 * @return @{@link Game} newly created Game
 	 */
-	public Game createNewGame(Player player1, Player player2) {
+	public Game createNewGame(Player player) {
 		// Create game and set variables
-		Game game = new Game((long) 1, player1, player2, player1, Game.State.WAIT_FOR_OPPONENT);
+		Game game = new Game(player, player, Game.State.WAIT_FOR_OPPONENT);
 
 		// Save game
 		gameRepository.save(game);

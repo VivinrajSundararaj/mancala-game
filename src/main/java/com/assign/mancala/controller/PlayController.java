@@ -67,17 +67,8 @@ public class PlayController {
 	public MancalaBoard doMove(@PathVariable int position) {
 		logger.debug("Starting move for Player");
 
-		String playerName = "";
-
-		if (position == 1 || position == 2 || position == 3 || position == 4 || position == 5 || position == 6) {
-			playerName = "vivin";
-		} else if (position == 7 || position == 8 || position == 9 || position == 10 || position == 11 || position == 12
-				|| position == 13) {
-			playerName = "sundar";
-		}
-
 		// Get info
-		Player player = playerService.getPlayerByUsername(playerName);
+		Player player = playerService.getLoggedInUser();
 		Long gameId = (Long) httpSession.getAttribute("gameId");
 		Game game = gameService.getGameById(gameId);
 
@@ -118,11 +109,11 @@ public class PlayController {
 	 * @return @{@link Integer} of the score
 	 */
 	@RequestMapping(value = "/score", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Integer getScore(@PathVariable String playerName) {
+	public Integer getScore() {
 		logger.debug("Getting player score");
 
 		// Get Info
-		Player player = playerService.getPlayerByUsername(playerName);
+		Player player = playerService.getLoggedInUser();
 		Long gameId = (Long) httpSession.getAttribute("gameId");
 		Game game = gameService.getGameById(gameId);
 

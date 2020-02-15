@@ -46,7 +46,6 @@ gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http',
                 location.path('/player/panel');
             });
 
-
             scope.joinGame = function (id) {
 
                 var requestUrl = "/game/join/" + id;
@@ -66,6 +65,33 @@ gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http',
         rootScope.reloadGamesToJoin();
     }]);
 
+gameModule.controller('playerGamesController', ['$rootScope', '$scope', '$http', '$location', '$routeParams',
+    function (rootScope, scope, http, location, routeParams) {
+        rootScope.reloadPlayerGames  =function () {
+
+            scope.playerGames = [];
+
+            http.get('/game/player/list').success(function (data) {
+                scope.playerGames = data;
+            }).error(function (data, status, headers, config) {
+                location.path('/player/panel');
+            });
+
+            scope.loadGame = function (id) {
+                console.log(id);
+                rootScope.gameId = id;
+                http.get('/game/' + id).success(function (data) {
+                    location.path('/game/' + id);
+                }).error(function (data, status, headers, config) {
+                    location.path('/player/panel');
+                });
+            }
+        };
+
+        rootScope.reloadPlayerGames();
+
+    }]);
+
 gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope', '$http',
     function (rootScope, routeParams, scope, http) {
         rootScope.stompClient = null;
@@ -77,6 +103,20 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 scope.gameBoard = [];
                 data.pits.forEach(function (pit) {
                     scope.gameBoard[pit.position] = pit.stoneCount;
+                    if(scope.gameState=='GAME_OVER'){
+	                    if(pit.position == 7){
+	                    	scope.playerOnePit = pit.stoneCount;
+	                    }else if (pit.position == 14){
+	                    	scope.playerTwoPit = pit.stoneCount;
+	                    }
+	                    if(scope.playerOnePit > scope.playerTwoPit){
+                        	scope.gameWinner = 'VIVIN';
+                        }else if(scope.playerOnePit < scope.playerTwoPit){
+                        	scope.gameWinner = 'SUNDAR';
+                        }
+	        			document.getElementById("homeButton").style.visibility = "visible";
+	        			document.getElementById("homeButton").style.display = "block";
+                    }
                 })
             }).error(function (data, status, headers, config) {
                 scope.errorMessage = "Failed do load game properties";
@@ -88,11 +128,6 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
             });
             http.get('/play/state').success(function (data) {
                 scope.gameState = data;
-            }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load game properties";
-            });
-            http.get('/play/score').success(function (data) {
-                scope.gameScore = data;
             }).error(function (data, status, headers, config) {
                 scope.errorMessage = "Failed do load game properties";
             });
@@ -114,7 +149,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
 
         scope.connectBoard();
 
-        scope.move = function (id,player) {
+        scope.move = function (id) {
             http.post('/play/move/' + id).success(function (data) {
                 scope.data = data
                 scope.reload();

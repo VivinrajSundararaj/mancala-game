@@ -193,11 +193,11 @@ public class PlayService {
 	 * @return The index of the @{@link Pit} last sowed on
 	 */
 	public int sowStones(MancalaBoard board, int position, int upper, boolean skipP1Store) {
-		// Get nr of stones from startPit and empty
+		// Get number of stones from startPit and empty
 		int amount = pitService.getPitNumberOfStonesByBoardAndPosition(board, position);
 		pitService.updatePitNumberOfStones(board, position, 0);
 
-		// Start on pos + 1
+		// Start on position + 1
 		int index = position + 1;
 
 		// Start Sowing
