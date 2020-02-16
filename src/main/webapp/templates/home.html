@@ -32,7 +32,6 @@
                 <tbody>
                 <tr ng-repeat="game in gamesToJoin">
                     <td>{{game.firstPlayer.username}}</td>
-                    <td>{{game.gameState}}</td>
                     <td>
                         <button type="submit" class="btn btn-sm" ng-click="joinGame(game.id)">
                             <span class="glyphicon glyphicon-plus"></span> Join </button>

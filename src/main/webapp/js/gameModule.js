@@ -102,33 +102,28 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 scope.gameBoard = [];
                 data.pits.forEach(function (pit) {
                     scope.gameBoard[pit.position] = pit.stoneCount;
-                    if(scope.gameState=='GAME_OVER'){
-	                    if(pit.position == 7){
-	                    	scope.playerOnePit = pit.stoneCount;
-	                    }else if (pit.position == 14){
-	                    	scope.playerTwoPit = pit.stoneCount;
-	                    }
-	                    if(scope.playerOnePit > scope.playerTwoPit){
-                        	scope.gameWinner = 'VIVIN';
-                        }else if(scope.playerOnePit < scope.playerTwoPit){
-                        	scope.gameWinner = 'SUNDAR';
-                        }
-	        			document.getElementById("homeButton").style.visibility = "visible";
-	        			document.getElementById("homeButton").style.display = "block";
-                    }
                 })
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load game properties";
+                scope.errorMessage = "Failed do load board properties";
             });
             http.get('/play/turn').success(function (data) {
                 scope.gameTurn = data;
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load game properties";
+                scope.errorMessage = "Failed do load player turn properties";
             });
             http.get('/play/state').success(function (data) {
                 scope.gameState = data;
+                if(scope.gameState=='GAME_OVER'){
+                	http.get('/play/winner').success(function (data) {
+                        scope.gameWinner = data;
+                    }).error(function (data, status, headers, config) {
+                        scope.errorMessage = "Failed do load winning player properties";
+                    });
+        			document.getElementById("homeButton").style.visibility = "visible";
+        			document.getElementById("homeButton").style.display = "block";
+                }
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load game properties";
+                scope.errorMessage = "Failed do load player state properties";
             });
         };
 

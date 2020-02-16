@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Player DTO class
  */
-public class PlayerDTO {
+public class PlayerDetails {
 
 	@NotNull
 	private String username;

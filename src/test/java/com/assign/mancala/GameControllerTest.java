@@ -87,7 +87,7 @@ public class GameControllerTest {
 		Player player = new Player("vivin", "vivin");
 		Player playerTwo = new Player("sundar", "sundar");
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PROGRESS);
 		List<Game> games = new ArrayList<>();
 		games.add(gameOne);
 
@@ -107,7 +107,7 @@ public class GameControllerTest {
 		Player playerTwo = new Player("sundar", "sundar");
 
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PROGRESS);
 
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 
@@ -123,7 +123,7 @@ public class GameControllerTest {
 		Player player = new Player("vivin", "vivin");
 		Player playerTwo = new Player("sundar", "sundar");
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PROGRESS);
 
 		when(playerService.getLoggedInUser()).thenReturn(playerTwo);
 		when(gameService.joinGame(playerTwo, gameId)).thenReturn(gameOne);

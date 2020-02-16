@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.assign.mancala.controller.PlayerController;
 import com.assign.mancala.model.Player;
-import com.assign.mancala.object.PlayerDTO;
+import com.assign.mancala.object.PlayerDetails;
 import com.assign.mancala.repository.PlayerRepository;
 import com.assign.mancala.service.BoardService;
 import com.assign.mancala.service.GameService;
@@ -58,9 +58,9 @@ public class PlayerControllerTest {
 	public void testCreateUser() throws Exception {
 		ObjectMapper objMapper = new ObjectMapper();
 		Player player = new Player("vivin", "vivin");
-		PlayerDTO playerDTO = new PlayerDTO();
+		PlayerDetails playerDTO = new PlayerDetails();
 
-		when(playerService.createPlayer(any(PlayerDTO.class))).thenReturn(player);
+		when(playerService.createPlayer(any(PlayerDetails.class))).thenReturn(player);
 
 		this.mockMvc
 				.perform(post("/player/create").contentType(MediaType.APPLICATION_JSON_UTF8)

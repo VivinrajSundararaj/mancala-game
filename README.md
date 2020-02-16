@@ -36,7 +36,7 @@ Chrome:
 	localhost:8080
 	login: vivin
 	password: vivin
-Firefox:
+New Chrome Tab or other browser(Firefox):
 
 	localhost:8080
 	login: sundar

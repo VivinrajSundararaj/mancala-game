@@ -61,7 +61,7 @@ public class GameService {
 		game.setSecondPlayer(player);
 
 		// Update gamestate
-		updateGameState(game, Game.State.GAME_IN_PLAY);
+		updateGameState(game, Game.State.GAME_IN_PROGRESS);
 
 		// Save game
 		gameRepository.save(game);
@@ -137,7 +137,7 @@ public class GameService {
 	 * @return List of @{@link Game} that are active for player
 	 */
 	public List<Game> getPlayerGames(Player player) {
-		return gameRepository.findByState(Game.State.GAME_IN_PLAY).stream()
+		return gameRepository.findByState(Game.State.GAME_IN_PROGRESS).stream()
 				.filter(game -> (game.getFirstPlayer() == player || game.getSecondPlayer() == player)
 
 				).collect(Collectors.toList());

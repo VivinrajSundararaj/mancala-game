@@ -107,34 +107,14 @@ public class PlayControllerTest {
 		Player player = new Player("vivin", "vivin");
 		Player playerTwo = new Player("sundar", "sundar");
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PROGRESS);
 
 		// Rules
 		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 
-		// Call SUT
 		this.mockMvc.perform(get("/play/turn").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(objMapper.writeValueAsString(player))));
-	}
-
-	@Test
-	@WithMockUser(username = "vivin", password = "vivin")
-	public void testGetPlayerScore() throws Exception {
-		ObjectMapper objMapper = new ObjectMapper();
-
-		Player player = new Player("vivin", "vivin");
-		Player playerTwo = new Player("sundar", "sundar");
-		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
-
-		int score = 991;
-		when(playerService.getLoggedInUser()).thenReturn(player);
-		when(gameService.getGameById(gameId)).thenReturn(gameOne);
-		when(playService.getScore(gameOne, player)).thenReturn(score);
-
-		this.mockMvc.perform(get("/play/score").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString(objMapper.writeValueAsString(score))));
 	}
 
 	@Test
@@ -145,13 +125,13 @@ public class PlayControllerTest {
 		Player player = new Player("vivin", "vivin");
 		Player playerTwo = new Player("sundar", "sundar");
 		Long gameId = 1L;
-		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PLAY);
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_IN_PROGRESS);
 
 		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 
 		this.mockMvc.perform(get("/play/state").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString(objMapper.writeValueAsString(Game.State.GAME_IN_PLAY))));
+				.andExpect(content().string(containsString(objMapper.writeValueAsString(Game.State.GAME_IN_PROGRESS))));
 	}
 
 	@Test
@@ -192,6 +172,47 @@ public class PlayControllerTest {
 		when(boardService.getBoardByGame(gameOne)).thenReturn(board);
 		this.mockMvc.perform(get("/play/board").sessionAttr("gameId", gameId)).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(objMapper.writeValueAsString(board))));
+	}
+
+	@Test
+	@WithMockUser(username = "vivin", password = "vivin")
+	public void testGetGameWinner() throws Exception {
+		ObjectMapper objMapper = new ObjectMapper();
+
+		Player player = new Player("vivin", "vivin");
+		Player playerTwo = new Player("sundar", "sundar");
+		Long gameId = 1L;
+		Game gameOne = new Game(gameId, player, playerTwo, player, Game.State.GAME_OVER);
+		List<Game> games = new ArrayList<>();
+		games.add(gameOne);
+
+		MancalaBoard board = new MancalaBoard(gameOne);
+		board.setId(1);
+
+		List<Pit> pits = new ArrayList<>();
+		Pit p1 = new Pit(board, 7, 20, Pit.PitType.LARGE);
+		pits.add(p1);
+		Pit p2 = new Pit(board, 14, 16, Pit.PitType.LARGE);
+		pits.add(p2);
+		for (int i = 1; i <= 6; i++) {
+			Pit p = new Pit(board, i, 6, Pit.PitType.SMALL);
+			pits.add(p);
+		}
+
+		for (int i = 8; i <= 13; i++) {
+			Pit p = new Pit(board, i, 6, Pit.PitType.SMALL);
+			pits.add(p);
+		}
+
+		board.setPits(pits);
+
+		when(playerService.getLoggedInUser()).thenReturn(player);
+		when(gameService.getGameById(gameId)).thenReturn(gameOne);
+		when(boardService.getBoardByGame(gameOne)).thenReturn(board);
+
+		this.mockMvc.perform(get("/play/winner").sessionAttr("gameId", gameId)).andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString(objMapper.writeValueAsString(player))));
 	}
 
 }

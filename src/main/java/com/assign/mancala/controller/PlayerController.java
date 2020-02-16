@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assign.mancala.model.CustomPlayer;
 import com.assign.mancala.model.Player;
-import com.assign.mancala.object.PlayerDTO;
+import com.assign.mancala.object.PlayerDetails;
 import com.assign.mancala.service.PlayerService;
 
 /**
@@ -39,11 +39,11 @@ public class PlayerController {
 	/**
 	 * REST endpoint to create a player
 	 *
-	 * @param playerDTO @{@link PlayerDTO} with new player info
+	 * @param playerDTO @{@link PlayerDetails} with new player info
 	 * @return @{@link Player} instance of the newly created player
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public Player createAccount(@RequestBody PlayerDTO playerDTO) {
+	public Player createAccount(@RequestBody PlayerDetails playerDTO) {
 		logger.debug("Creating new Player");
 
 		Player newPlayer = playerService.createPlayer(playerDTO);

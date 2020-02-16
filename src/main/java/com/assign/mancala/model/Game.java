@@ -25,7 +25,7 @@ public class Game {
 	 * Enum for the current state of the game
 	 */
 	public enum State {
-		GAME_IN_PLAY, WAIT_FOR_OPPONENT, GAME_OVER
+		GAME_IN_PROGRESS, WAIT_FOR_OPPONENT, GAME_OVER
 	}
 
 	@Column(name = "state", nullable = false)
