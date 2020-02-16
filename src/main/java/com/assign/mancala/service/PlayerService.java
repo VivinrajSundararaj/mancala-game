@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.assign.mancala.model.CustomPlayer;
 import com.assign.mancala.model.Player;
-import com.assign.mancala.object.PlayerDetails;
 import com.assign.mancala.repository.PlayerRepository;
 
 /**
@@ -27,22 +26,6 @@ public class PlayerService {
 	@Autowired
 	public PlayerService(PlayerRepository playerRepository) {
 		this.playerRepository = playerRepository;
-	}
-
-	/**
-	 * Function to create a new Player
-	 *
-	 * @param playerDTO @{@link PlayerDetails} to create player from
-	 * @return @{@link Player} that was created
-	 */
-	public Player createPlayer(PlayerDetails playerDTO) {
-		// Create Player
-		Player player = new Player(playerDTO.getUsername(), playerDTO.getPassword());
-
-		// Save Player
-		playerRepository.save(player);
-
-		return player;
 	}
 
 	/**

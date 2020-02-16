@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.assign.mancala.controller.GameController;
 import com.assign.mancala.controller.PlayController;
-import com.assign.mancala.controller.PlayerController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,13 +21,9 @@ public class MancalaGameBolApplicationTests {
 	@Autowired
 	private PlayController playController;
 
-	@Autowired
-	private PlayerController playerController;
-
 	@Test
 	public void contextLoads() {
 		assertThat(gameController).isNotNull();
 		assertThat(playController).isNotNull();
-		assertThat(playerController).isNotNull();
 	}
 }

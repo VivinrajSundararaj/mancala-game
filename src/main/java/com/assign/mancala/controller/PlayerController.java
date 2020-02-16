@@ -5,14 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assign.mancala.model.CustomPlayer;
 import com.assign.mancala.model.Player;
-import com.assign.mancala.object.PlayerDetails;
 import com.assign.mancala.service.PlayerService;
 
 /**
@@ -34,20 +31,6 @@ public class PlayerController {
 	@Autowired
 	public PlayerController(PlayerService playerService) {
 		this.playerService = playerService;
-	}
-
-	/**
-	 * REST endpoint to create a player
-	 *
-	 * @param playerDTO @{@link PlayerDetails} with new player info
-	 * @return @{@link Player} instance of the newly created player
-	 */
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public Player createAccount(@RequestBody PlayerDetails playerDTO) {
-		logger.debug("Creating new Player");
-
-		Player newPlayer = playerService.createPlayer(playerDTO);
-		return newPlayer;
 	}
 
 	/**
