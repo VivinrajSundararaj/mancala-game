@@ -1,17 +1,17 @@
 # mancala_game
 
-Mancala board game in Spring Boot and angular.js for bol.com
+Mancala board game created using angular.js, spring boot and mysql for data persistence
 
 ### Tools & Technology Used
-**Back End:**
-- Java
-- Spring Boot
-- mysql
-
 **Front End:**
 - Angularjs
 - SockJS
 - StompClient
+
+**Back End:**
+- Java
+- Spring Boot
+- mysql
 
 ### Pre-requisites
 MYSQL Database should be installed and configured as below to respond to the REST Service calls
