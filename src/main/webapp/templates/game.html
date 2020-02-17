@@ -45,24 +45,27 @@
 
     </div>
     <div class="col-md-6">
+    	<!-- DISPLAYS WHO IS NEXT TO PLAY -->
 	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
 	        <p style="color:red;">
 	            Turn: {{gameTurn.username}}
 	        </p>
 	    </div>
+	    <!-- DISPLAYS CURRENT STATE OF GAME -->
 	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
 	        <p style="color:blue;" >
 	            Status: {{gameState}}
 	        </p>
 	    </div>
-	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
+	    <!-- DISPLAYS THE WINNER OF GAME ONCE ITS OVER -->
+	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;" ng-show="IsVisible">
 	        <p style="color:blue;" >
 	            Winner Of the GAME: {{gameWinner.username}}
 	        </p>
 	    </div>
    	</div>
-   	<div class="col-md-8" id="homeButton" align="right" style="padding-bottom:50px;visibility:hidden;display:none;">
-		<!-- <a href="#/"><span class="glyphicon" ></span> Go to Home Page</a> -->
+   	<!-- VISIBLE ONCE THE GAME IS OVER -->
+   	<div class="col-md-8" ng-show="IsVisible" id="homeButton" align="right" style="padding-bottom:50px;">
 		<button onClick="window.location='#/';" class="btn btn-md btn-primary" style="width:300px;text-align:center;">
         <span class="glyphicon"></span> Go to Home Page</button>
 	</div>

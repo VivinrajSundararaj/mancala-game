@@ -111,13 +111,13 @@ public class GameController {
 		// Get logged in player
 		Player player = playerService.getLoggedInUser();
 
-		// Retrieve game to join and join
+		// Retrieve game to join and join the same
 		Game game = gameService.joinGame(player, id);
 
 		// Store game id in HttpSession
 		httpSession.setAttribute("gameId", id);
 
-		// Notify lobby and game of status update over socket
+		// Notify home and game of status update over socket
 		template.convertAndSend("/update/join/" + id, "joined");
 		template.convertAndSend("/update/home", "updated");
 
@@ -134,7 +134,6 @@ public class GameController {
 	@RequestMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Game> getGamesToJoin() {
 		logger.debug("Getting games to Join");
-
 		return gameService.getGamesToJoin(playerService.getLoggedInUser());
 	}
 
@@ -146,7 +145,6 @@ public class GameController {
 	@RequestMapping(value = "/player/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Game> getPlayerGames() {
 		logger.debug("Getting active game for player");
-
 		return gameService.getPlayerGames(playerService.getLoggedInUser());
 	}
 
@@ -164,7 +162,6 @@ public class GameController {
 		httpSession.setAttribute("gameId", id);
 
 		logger.debug("existing game id: " + httpSession.getAttribute("gameId") + " stored in session");
-
 		return gameService.getGameById(id);
 	}
 }

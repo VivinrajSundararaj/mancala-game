@@ -4,9 +4,7 @@ Mancala board game created using angular.js, spring boot and mysql for data pers
 
 ### Tools & Technology Used
 **Front End:**
-- Angularjs
-- SockJS
-- StompClient
+- AngularJS
 
 **Back End:**
 - Java
@@ -23,7 +21,7 @@ Setup db:
 	grant all privileges on mancala_game.* to 'mancala'@'localhost';
 
 ### HOW TO RUN
-Spring boot startup will add 2 players into database.
+Spring boot startup will add 2 players (vivin & sundar used for demo) into database.
 
 To run the test cases:
 

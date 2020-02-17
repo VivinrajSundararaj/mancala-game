@@ -1,13 +1,12 @@
 var gameModule = angular.module('gameModule', []);
 
+// CONTROLLER USED TO CREATE NEW GAME //
 gameModule.controller('homeController', ['$rootScope', '$scope', '$http', '$location',
 
     function (rootScope, scope, http, location) {
-
         rootScope.stompClient = null;
 
         scope.createNewGame = function () {
-
             http.post("/game/create", {
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -29,12 +28,11 @@ gameModule.controller('homeController', ['$rootScope', '$scope', '$http', '$loca
                 scope.stompClient.subscribe('/update/home', rootScope.reloadGamesToJoin);
             });
         };
-
         scope.connectHome();
-
     }
 ]);
 
+// CONTROLLER USED TO GET THE LIST OF GAMES AND JOIN //
 gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http', '$location',
     function (rootScope, scope, http, location) {
         rootScope.reloadGamesToJoin = function () {
@@ -46,7 +44,6 @@ gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http',
             });
 
             scope.joinGame = function (id) {
-
                 var requestUrl = "/game/join/" + id;
                 http.post(requestUrl, {
                     headers: {
@@ -64,12 +61,11 @@ gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http',
         rootScope.reloadGamesToJoin();
     }]);
 
+// CONTROLLER USED TO GET THE PLAYER DETAILS OF GAME //
 gameModule.controller('playerGamesController', ['$rootScope', '$scope', '$http', '$location', '$routeParams',
     function (rootScope, scope, http, location, routeParams) {
         rootScope.reloadPlayerGames  =function () {
-
             scope.playerGames = [];
-
             http.get('/game/player/list').success(function (data) {
                 scope.playerGames = data;
             }).error(function (data, status, headers, config) {
@@ -86,14 +82,15 @@ gameModule.controller('playerGamesController', ['$rootScope', '$scope', '$http',
                 });
             }
         };
-
         rootScope.reloadPlayerGames();
 
     }]);
 
+// CONTROLLER USED TO GET THE SCORE AND BOARD WHEN GAME IS PROGRESS //
 gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope', '$http',
     function (rootScope, routeParams, scope, http) {
         rootScope.stompClient = null;
+        scope.IsVisible=false;
 
         rootScope.reload = function getData() {
             console.log("RELOADING DATA");
@@ -119,8 +116,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                     }).error(function (data, status, headers, config) {
                         scope.errorMessage = "Failed do load winning player properties";
                     });
-        			document.getElementById("homeButton").style.visibility = "visible";
-        			document.getElementById("homeButton").style.display = "block";
+        			scope.IsVisible=true;
                 }
             }).error(function (data, status, headers, config) {
                 scope.errorMessage = "Failed do load player state properties";
