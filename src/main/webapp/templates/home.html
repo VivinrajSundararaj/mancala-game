@@ -4,7 +4,7 @@
         <div class="alert alert-success">{{successMessage}}</div>
     </div>
     <div class="row">
-        <!-- FORM for creating new game -->
+        <!-- FORM FOR CREATING NEW GAME -->
         <div class="col" align="center">
             <form name="startNewGame" class="form-horizontal" novalidate ng-submit="createNewGame()">
 
@@ -27,11 +27,13 @@
                 <h2 class="lead">Join existing game</h2>
                 <thead>
                 <td>Started player</td>
+                <td>Game Id</td>
                 <td>Join the Game</td>
                 </thead>
                 <tbody>
                 <tr ng-repeat="game in gamesToJoin">
                     <td>{{game.firstPlayer.username}}</td>
+                    <td>{{game.id}}
                     <td>
                         <button type="submit" class="btn btn-sm" ng-click="joinGame(game.id)">
                             <span class="glyphicon glyphicon-plus"></span> Join </button>

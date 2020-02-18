@@ -120,14 +120,14 @@ public class PlayService {
 		// Validate pit position is >= 8 and <= 13
 		if (position >= P1_LOWER_BOUNDARY && position <= P1_UPPER_BOUNDARY && nrOfStones > 0) {
 			// Do Move
-			int index = sowStones(board, position, P1_STORE, true);
+			int index = addStones(board, position, P1_STORE, true);
 
 			// Check capture
 			checkCapture(board, index, P1_LOWER_BOUNDARY, P1_UPPER_BOUNDARY, P1_STORE);
 
 			// Check turn
 			if (index != P1_STORE) {
-				// Switch turn
+				// Switch player turn
 				gameService.switchTurn(game.getSecondPlayer(), game.getId());
 			}
 
@@ -160,14 +160,14 @@ public class PlayService {
 		// Validate pit position is >= 1 and <= 6
 		if (position >= P2_LOWER_BOUNDARY && position <= P2_UPPER_BOUNDARY && nrOfStones > 0) {
 			// Do Move
-			int index = sowStones(board, position, P1_UPPER_BOUNDARY, false);
+			int index = addStones(board, position, P1_UPPER_BOUNDARY, false);
 
 			// Check capture
 			checkCapture(board, index, P2_LOWER_BOUNDARY, P2_UPPER_BOUNDARY, P2_STORE);
 
 			// Check turn
 			if (index != P2_STORE) {
-				// Switch turn
+				// Switch player turn
 				gameService.switchTurn(game.getFirstPlayer(), game.getId());
 			}
 
@@ -183,7 +183,7 @@ public class PlayService {
 	}
 
 	/**
-	 * Function to sow the stones one by one until empty
+	 * Function to add the stones one by one until empty
 	 *
 	 * @param board       @{@link MancalaBoard} of the game
 	 * @param position    To start sowing from
@@ -191,7 +191,7 @@ public class PlayService {
 	 * @param skipP1Store boolean if needs to skip P1 store (i.e. is P2)
 	 * @return The index of the @{@link Pit} last sowed on
 	 */
-	public int sowStones(MancalaBoard board, int position, int upper, boolean skipP1Store) {
+	public int addStones(MancalaBoard board, int position, int upper, boolean skipP1Store) {
 		// Get number of stones from startPit and empty
 		int amount = pitService.getPitNumberOfStonesByBoardAndPosition(board, position);
 		pitService.updatePitNumberOfStones(board, position, 0);

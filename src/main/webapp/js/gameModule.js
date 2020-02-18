@@ -61,31 +61,6 @@ gameModule.controller('gamesToJoinController', ['$rootScope', '$scope', '$http',
         rootScope.reloadGamesToJoin();
     }]);
 
-// CONTROLLER USED TO GET THE PLAYER DETAILS OF GAME //
-gameModule.controller('playerGamesController', ['$rootScope', '$scope', '$http', '$location', '$routeParams',
-    function (rootScope, scope, http, location, routeParams) {
-        rootScope.reloadPlayerGames  =function () {
-            scope.playerGames = [];
-            http.get('/game/player/list').success(function (data) {
-                scope.playerGames = data;
-            }).error(function (data, status, headers, config) {
-                location.path('/player/panel');
-            });
-
-            scope.loadGame = function (id) {
-                console.log(id);
-                rootScope.gameId = id;
-                http.get('/game/' + id).success(function (data) {
-                    location.path('/game/' + id);
-                }).error(function (data, status, headers, config) {
-                    location.path('/player/panel');
-                });
-            }
-        };
-        rootScope.reloadPlayerGames();
-
-    }]);
-
 // CONTROLLER USED TO GET THE SCORE AND BOARD WHEN GAME IS PROGRESS //
 gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope', '$http',
     function (rootScope, routeParams, scope, http) {
@@ -119,7 +94,11 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 scope.gameState = data;
                 if(scope.gameState=='GAME_OVER'){
                 	http.get('/play/winner').success(function (data) {
-                        scope.gameWinner = data;
+                		if(data == null){
+                			scope.gameWinner = 'GAME_TIED'
+                		}else{
+                            scope.gameWinner = data;
+                		}
                     }).error(function (data, status, headers, config) {
                         scope.errorMessage = "Failed do load winning player properties";
                     });
