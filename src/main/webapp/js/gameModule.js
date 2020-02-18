@@ -103,6 +103,13 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
             }).error(function (data, status, headers, config) {
                 scope.errorMessage = "Failed do load board properties";
             });
+            
+            http.get('/player/logged').success(function (data) {
+                scope.gamePlayer = data;
+            }).error(function (data, status, headers, config) {
+                scope.errorMessage = "Failed do load game properties";
+            });
+            
             http.get('/play/turn').success(function (data) {
                 scope.gameTurn = data;
             }).error(function (data, status, headers, config) {

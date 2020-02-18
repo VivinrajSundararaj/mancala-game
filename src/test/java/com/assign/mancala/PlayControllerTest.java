@@ -190,9 +190,9 @@ public class PlayControllerTest {
 		board.setId(1);
 
 		List<Pit> pits = new ArrayList<>();
-		Pit p1 = new Pit(board, 7, 20, Pit.PitType.LARGE);
+		Pit p1 = new Pit(board, 14, 20, Pit.PitType.LARGE);
 		pits.add(p1);
-		Pit p2 = new Pit(board, 14, 16, Pit.PitType.LARGE);
+		Pit p2 = new Pit(board, 7, 16, Pit.PitType.LARGE);
 		pits.add(p2);
 		for (int i = 1; i <= 6; i++) {
 			Pit p = new Pit(board, i, 6, Pit.PitType.SMALL);

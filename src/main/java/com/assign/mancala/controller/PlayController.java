@@ -161,10 +161,11 @@ public class PlayController {
 			int playerOnePit = 0;
 			int playerTwoPit = 0;
 			for (Pit pit : pits) {
+
 				// Get Players Mancala Stone Count
-				if (pit.getPosition() == 7) {
+				if (pit.getPosition() == 14) { // Player 1
 					playerOnePit = pit.getStoneCount();
-				} else if (pit.getPosition() == 14) {
+				} else if (pit.getPosition() == 7) { // Player 2
 					playerTwoPit = pit.getStoneCount();
 				}
 			}

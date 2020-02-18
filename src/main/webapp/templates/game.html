@@ -6,7 +6,7 @@
             <div class="row text-center">
                 <div class="col-md-2">
                     <a class="btn btn-info btn-sq-lg" disabled>
-                         Player 02 <br>SUNDAR<br><strong>{{gameBoard[14]}}</strong>
+                         Player 01<br><strong>{{gameBoard[14]}}</strong>
                     </a>
                 </div>
 
@@ -34,33 +34,41 @@
                 	<div class="row center-block"></div><br><br><br><br>
                 	<div class="row center-block">
                     <a class="btn btn-info btn-sq-lg" disabled>
-                        Player 01 <br>VIVIN<br><strong>{{gameBoard[7]}}</strong>
+                        Player 02 <br><strong>{{gameBoard[7]}}</strong>
                     </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
 
     </div>
     <div class="col-md-6">
+    	<br>
+    	<!-- DISPLAYS CURRENT LOGGED IN PLAYER -->
+	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
+	        <p style="color:blue;" >
+	            CURRENT LOGGED IN PLAYER: {{gamePlayer.username}}
+	        </p>
+	    </div>
+    	
     	<!-- DISPLAYS WHO IS NEXT TO PLAY -->
 	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
 	        <p style="color:red;">
-	            Turn: {{gameTurn.username}}
+	            PLAYER TURN: {{gameTurn.username}}
 	        </p>
 	    </div>
+	    
 	    <!-- DISPLAYS CURRENT STATE OF GAME -->
 	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;">
 	        <p style="color:blue;" >
-	            Status: {{gameState}}
+	            GAME STATUS : {{gameState}}
 	        </p>
 	    </div>
 	    <!-- DISPLAYS THE WINNER OF GAME ONCE ITS OVER -->
 	    <div class="row center-block" style="margin-left: 100px; margin-top: 5px;" ng-show="IsVisible">
 	        <p style="color:blue;" >
-	            Winner Of the GAME: {{gameWinner.username}}
+	           WINNER OF THE GAME: {{gameWinner.username}}
 	        </p>
 	    </div>
    	</div>

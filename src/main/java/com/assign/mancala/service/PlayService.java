@@ -22,12 +22,12 @@ public class PlayService {
 
 	// Game constants
 	public static final int NR_OF_PITS = 14;
-	public static final int P1_LOWER_BOUNDARY = 1;
-	public static final int P1_UPPER_BOUNDARY = 6;
-	public static final int P2_LOWER_BOUNDARY = 8;
-	public static final int P2_UPPER_BOUNDARY = 13;
-	public static final int P1_STORE = 7;
-	public static final int P2_STORE = 14;
+	public static final int P2_LOWER_BOUNDARY = 1;
+	public static final int P2_UPPER_BOUNDARY = 6;
+	public static final int P1_LOWER_BOUNDARY = 8;
+	public static final int P1_UPPER_BOUNDARY = 13;
+	public static final int P2_STORE = 7;
+	public static final int P1_STORE = 14;
 
 	/**
 	 * PlayService constructor
@@ -93,11 +93,11 @@ public class PlayService {
 
 		// Score is number of stones in big pit
 
-		// P1
+		// Player 1
 		if (player == game.getFirstPlayer()) {
 			return pitService.getPitNumberOfStonesByBoardAndPosition(board, P1_STORE);
 		}
-		// P2
+		// Player 2
 		else {
 			return pitService.getPitNumberOfStonesByBoardAndPosition(board, P2_STORE);
 		}
@@ -117,10 +117,10 @@ public class PlayService {
 		// Check if pit not empty
 		int nrOfStones = pitService.getPitNumberOfStonesByBoardAndPosition(board, position);
 
-		// Validate pit position is >= 1 and <= 6
+		// Validate pit position is >= 8 and <= 13
 		if (position >= P1_LOWER_BOUNDARY && position <= P1_UPPER_BOUNDARY && nrOfStones > 0) {
 			// Do Move
-			int index = sowStones(board, position, P2_UPPER_BOUNDARY, false);
+			int index = sowStones(board, position, P1_STORE, true);
 
 			// Check capture
 			checkCapture(board, index, P1_LOWER_BOUNDARY, P1_UPPER_BOUNDARY, P1_STORE);
@@ -157,10 +157,10 @@ public class PlayService {
 		// Check if pit not empty
 		int nrOfStones = pitService.getPitNumberOfStonesByBoardAndPosition(board, position);
 
-		// Validate pit position is >= 8 and <= 13
+		// Validate pit position is >= 1 and <= 6
 		if (position >= P2_LOWER_BOUNDARY && position <= P2_UPPER_BOUNDARY && nrOfStones > 0) {
 			// Do Move
-			int index = sowStones(board, position, P2_STORE, true);
+			int index = sowStones(board, position, P1_UPPER_BOUNDARY, false);
 
 			// Check capture
 			checkCapture(board, index, P2_LOWER_BOUNDARY, P2_UPPER_BOUNDARY, P2_STORE);
@@ -179,7 +179,6 @@ public class PlayService {
 				gameService.updateGameState(game, Game.State.GAME_OVER);
 			}
 		}
-
 		return board;
 	}
 
@@ -203,10 +202,10 @@ public class PlayService {
 		// Start Sowing
 		while (amount != 0) {
 			if (index > upper) {
-				index = P1_LOWER_BOUNDARY;
-			} else if (skipP1Store && index == P1_STORE) {
-				// Skip P1 store
 				index = P2_LOWER_BOUNDARY;
+			} else if (skipP1Store && index == P2_STORE) {
+				// Skip P1 store
+				index = P1_LOWER_BOUNDARY;
 			}
 
 			// Add stone for every pit
@@ -289,7 +288,7 @@ public class PlayService {
 	 * @param board @{@link MancalaBoard} to empty Pits for
 	 */
 	public void emptyAllPits(MancalaBoard board) {
-		// Empty P1 small pits
+		// Empty Player 1 small pits
 		for (int i = P1_LOWER_BOUNDARY; i <= P1_UPPER_BOUNDARY; i++) {
 			int tmpAmount = pitService.getPitNumberOfStonesByBoardAndPosition(board, i);
 			if (tmpAmount > 0) {
@@ -298,7 +297,7 @@ public class PlayService {
 			}
 		}
 
-		// Empty P2 small pits
+		// Empty Player 2 small pits
 		for (int i = P2_LOWER_BOUNDARY; i <= P2_UPPER_BOUNDARY; i++) {
 			int tmpAmount = pitService.getPitNumberOfStonesByBoardAndPosition(board, i);
 			if (tmpAmount > 0) {

@@ -76,8 +76,8 @@ public class GameController {
 		MancalaBoard board = boardService.createNewBoard(game);
 
 		// Create Pits 6x6 layout + 2 Large Pits
-		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P1_STORE, 0); // store position 7
-		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P2_STORE, 0); // store position 14
+		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P1_STORE, 0); // create large pit for P1 position 7
+		pitService.createPit(board, Pit.PitType.LARGE, PlayService.P2_STORE, 0); // create large pit for P2 position 14
 
 		// P1 small pits
 		for (int i = PlayService.P1_LOWER_BOUNDARY; i <= PlayService.P1_UPPER_BOUNDARY; i++) {
