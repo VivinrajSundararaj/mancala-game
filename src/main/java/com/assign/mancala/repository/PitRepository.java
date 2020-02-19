@@ -1,7 +1,5 @@
 package com.assign.mancala.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,13 +11,6 @@ import com.assign.mancala.model.Pit;
  */
 @Repository
 public interface PitRepository extends CrudRepository<Pit, Long> {
-	/**
-	 * Find Pit by @{@link MancalaBoard}
-	 *
-	 * @param GameBoard @{@link MancalaBoard} to find pits by
-	 * @return List of @{@link Pit}
-	 */
-	List<Pit> findByGameBoardOrderByPositionAsc(MancalaBoard GameBoard);
 
 	/**
 	 * Find Pit by @{@link MancalaBoard} and position

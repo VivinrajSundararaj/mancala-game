@@ -24,7 +24,6 @@ gameModule.controller('homeController', ['$rootScope', '$scope', '$http', '$loca
             scope.stompClient = Stomp.over(socket);
             scope.stompClient.connect({}, function (frame) {
                 console.log('Connected: ' + frame);
-                scope.stompClient.subscribe('/update/home', rootScope.reloadPlayerGames);
                 scope.stompClient.subscribe('/update/home', rootScope.reloadGamesToJoin);
             });
         };
@@ -76,19 +75,19 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                     scope.gameBoard[pit.position] = pit.stoneCount;
                 })
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load board properties";
+                scope.errorMessage = "Failed to load board properties";
             });
             
             http.get('/player/logged').success(function (data) {
                 scope.gamePlayer = data;
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load game properties";
+                scope.errorMessage = "Failed to load game properties";
             });
             
             http.get('/play/turn').success(function (data) {
                 scope.gameTurn = data;
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load player turn properties";
+                scope.errorMessage = "Failed to load player turn properties";
             });
             http.get('/play/state').success(function (data) {
                 scope.gameState = data;
@@ -100,12 +99,12 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                             scope.gameWinner = data;
                 		}
                     }).error(function (data, status, headers, config) {
-                        scope.errorMessage = "Failed do load winning player properties";
+                        scope.errorMessage = "Failed to load winning player properties";
                     });
         			scope.IsVisible=true;
                 }
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do load player state properties";
+                scope.errorMessage = "Failed to load player state properties";
             });
         };
 
@@ -130,7 +129,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 scope.data = data
                 scope.reload();
             }).error(function (data, status, headers, config) {
-                scope.errorMessage = "Failed do do move";
+                scope.errorMessage = "Failed to do move";
             });
         };
 

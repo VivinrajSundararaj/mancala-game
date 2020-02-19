@@ -23,12 +23,13 @@ Setup db:
 ### HOW TO RUN
 Spring boot startup will add 2 players (vivin & sundar used for demo) into database.
 
+To run application:
+	
+	mvn spring-boot:run(or you can run via Spring Tool Suite or Intellij IDE) or 
+	java -jar target/mancala-game-bol-0.0.1-SNAPSHOT.jar
 To run the test cases:
 
 	mvn test
-To run application:
-	
-	mvn spring-boot:run(or you can run via Spring Tool Suite or Intellij IDE)
 Login to web application with the first player
 	
 	localhost:8080
@@ -39,4 +40,4 @@ Once logged in start with the game and login with second player
 	localhost:8080
 	login: sundar
 	password: sundar
-Now we can go ahead with the game and once the game is over, the winner will be displayed!
+Now we can go ahead to play the game and once the game is over, the winner will be displayed!
