@@ -1,5 +1,11 @@
 package com.assign.mancala.object;
 
+/**
+ * 
+ * Global Error Response Object
+ *
+ */
+
 public class GlobalErrorResponse {
 	private String errorCode;
 	private String message;

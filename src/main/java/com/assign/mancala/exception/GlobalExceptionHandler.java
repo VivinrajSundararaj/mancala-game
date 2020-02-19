@@ -16,6 +16,11 @@ import com.assign.mancala.controller.PlayController;
 import com.assign.mancala.controller.PlayerController;
 import com.assign.mancala.object.GlobalErrorResponse;
 
+/**
+ * 
+ * Class to handle the exceptions
+ *
+ */
 @ControllerAdvice(assignableTypes = { GameController.class, PlayController.class, PlayerController.class })
 public class GlobalExceptionHandler {
 

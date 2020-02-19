@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
- * GameBoard model.
+ * Mancala Game Board model.
  */
 @Entity
 @Table(name = "mancala_board", catalog = "mancala_game")

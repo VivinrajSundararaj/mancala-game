@@ -13,6 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.assign.mancala.repository.PlayerRepository;
 import com.assign.mancala.service.CustomUserDetailsService;
 
+/**
+ * 
+ * Class for the configuration of security for the application
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
