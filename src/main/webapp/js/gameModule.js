@@ -94,7 +94,7 @@ gameModule.controller('gameController', ['$rootScope', '$routeParams', '$scope',
                 scope.gameState = data;
                 if(scope.gameState=='GAME_OVER'){
                 	http.get('/play/winner').success(function (data) {
-                		if(data == null){
+                		if(data == ''){
                 			scope.gameWinner = 'GAME_TIED'
                 		}else{
                             scope.gameWinner = data;

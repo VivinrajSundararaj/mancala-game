@@ -199,7 +199,7 @@ public class PlayService {
 		// Start on position + 1
 		int index = position + 1;
 
-		// Start Sowing
+		// Start Adding the Stones
 		while (amount != 0) {
 			if (index > upper) {
 				index = P2_LOWER_BOUNDARY;

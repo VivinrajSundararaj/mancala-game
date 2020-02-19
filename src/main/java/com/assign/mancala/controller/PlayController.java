@@ -1,7 +1,5 @@
 package com.assign.mancala.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assign.mancala.model.Game;
 import com.assign.mancala.model.MancalaBoard;
-import com.assign.mancala.model.Pit;
 import com.assign.mancala.model.Player;
 import com.assign.mancala.service.BoardService;
 import com.assign.mancala.service.GameService;
@@ -153,30 +150,20 @@ public class PlayController {
 		// Get Game and Board Info
 		Long gameId = (Long) httpSession.getAttribute("gameId");
 		Game game = gameService.getGameById(gameId);
-		MancalaBoard board = boardService.getBoardByGame(game);
-		List<Pit> pits = board.getPits();
 
 		// Check the game state
 		if (game.getState() == Game.State.GAME_OVER) {
-			int playerOnePit = 0;
-			int playerTwoPit = 0;
-			for (Pit pit : pits) {
+			// Get Mancala Stone Count of Player
+			int playerOnePit = playService.getScore(game, game.getFirstPlayer());
+			int playerTwoPit = playService.getScore(game, game.getSecondPlayer());
 
-				// Get Players Mancala Stone Count
-				if (pit.getPosition() == 14) { // Player 1
-					playerOnePit = pit.getStoneCount();
-				} else if (pit.getPosition() == 7) { // Player 2
-					playerTwoPit = pit.getStoneCount();
-				}
-			}
-			// Check who got more stones
+			// Return the player who got more stones
 			if (playerOnePit > playerTwoPit) {
 				return game.getFirstPlayer();
 			} else if (playerTwoPit > playerOnePit) {
 				return game.getSecondPlayer();
 			}
 		}
-		// Return the player who won the game
 		return null;
 	}
 

@@ -144,7 +144,7 @@ public class GameController {
 	 */
 	@RequestMapping(value = "/player/list", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Game> getPlayerGames() {
-		logger.debug("Getting active game for player");
+		logger.debug("Getting active players of the game");
 		return gameService.getPlayerGames(playerService.getLoggedInUser());
 	}
 

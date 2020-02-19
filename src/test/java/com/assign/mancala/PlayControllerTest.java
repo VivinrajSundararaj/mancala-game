@@ -190,6 +190,9 @@ public class PlayControllerTest {
 		board.setId(1);
 
 		List<Pit> pits = new ArrayList<>();
+		int playerOneCount = 20;
+		int playerTwoCount = 16;
+
 		Pit p1 = new Pit(board, 14, 20, Pit.PitType.LARGE);
 		pits.add(p1);
 		Pit p2 = new Pit(board, 7, 16, Pit.PitType.LARGE);
@@ -209,6 +212,8 @@ public class PlayControllerTest {
 		when(playerService.getLoggedInUser()).thenReturn(player);
 		when(gameService.getGameById(gameId)).thenReturn(gameOne);
 		when(boardService.getBoardByGame(gameOne)).thenReturn(board);
+		when(playService.getScore(gameOne, player)).thenReturn(playerOneCount);
+		when(playService.getScore(gameOne, playerTwo)).thenReturn(playerTwoCount);
 
 		this.mockMvc.perform(get("/play/winner").sessionAttr("gameId", gameId)).andDo(print())
 				.andExpect(status().isOk())
