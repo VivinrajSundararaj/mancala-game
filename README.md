@@ -7,12 +7,12 @@ Mancala board game created using angular.js, spring boot and mysql for data pers
 - AngularJS
 
 **Back End:**
-- Java
+- Java 1.8
 - Spring Boot
-- mysql
+- MySQL 8.0
 
 ### Pre-requisites
-MYSQL Database should be installed and configured as below to respond to the REST Service calls from front end
+MYSQL Database should be installed and configured as below
 
 Setup db:
 
@@ -35,7 +35,7 @@ Login to web application with the first player
 	localhost:8080
 	login: vivin
 	password: vivin	
-Once logged in start with the game and login with second player 
+Once logged in, start with the game and login with second player 
 
 	localhost:8080
 	login: sundar
